@@ -1,0 +1,44 @@
+package homework3;
+import homework3.EFoodType;
+import homework3.IEdible;
+import homework3.MessageUtility;
+import homework3.Animal;
+
+/**
+ * 
+ * @author Ilan Shklover,Shira Cohen
+ *This class represents animals who eat everything.
+ */
+public class Omnivore implements IDiet  {
+	
+	/**
+	 * Checks if the animal can eat the 'food' received as a parameter.
+	 * @param - something edible for animal(other animal or plant)
+	 * @return - True if the animal is able to eat the food in parameter 'food',else false.
+	 */
+	public boolean canEat(EFoodType food) {
+		MessageUtility.logBooleanFunction("Omnivore","canEat", food, food != EFoodType.NOTFOOD);
+		return food != EFoodType.NOTFOOD;
+	}
+	
+	
+	
+	
+	/**
+	 *Performs simulation of eating.
+	 *@param animal - A certain animal.
+	 *@param food - Something edible which can be an animal or a plant.
+	 *@return - If the animal can eat the 'food' received as a parameter,
+	 *then the amount of weight the animal will gain from this meal will be returned.
+	 */
+    public double eat(Animal animal, IEdible food) {
+		if(this.canEat(food.getFoodtype())) {
+			if(food instanceof Animal)
+				return animal.get_diet().eat(animal,food);
+			else 
+				return animal.get_diet().eat(animal, food);
+		}
+		return 0;
+    }
+
+}
